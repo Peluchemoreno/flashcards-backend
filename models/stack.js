@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {cardSchema} = require('./card')
 
 const stackSchema = new mongoose.Schema({
   name: {
@@ -9,7 +10,12 @@ const stackSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now()
-  }
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+  cards: [cardSchema]
 })
 
 const Stack = mongoose.model('stacks', stackSchema)

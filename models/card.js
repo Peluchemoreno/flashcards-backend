@@ -1,23 +1,31 @@
 const mongoose = require('mongoose');
 
-const cardSchema = mongoose.Schema({
-  stack: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
+const cardSchema = new mongoose.Schema({
   question: {
     type: String,
+    required: true,
     minlength: 2,
     maxlength: 100,
-    required: true,
   },
   answer: {
     type: String,
-    minlength: 1,
     required: true,
+    minlength: 2,
+    maxlength: 300,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+  stack: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
   }
 })
 
 const Card = mongoose.model('card', cardSchema);
 
-module.exports = Card;
+module.exports = {
+  Card, 
+  cardSchema
+};
